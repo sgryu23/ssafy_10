@@ -426,3 +426,32 @@
 ## <span style="color: #007777">**그 외**</span>
 django REST framework 공식 문서를 보는 버릇을 들이기!
 여기: https://www.django-rest-framework.org/
+
+<br>
+<br>
+
+## 10월 19일 추가 내용
+DRF는 validation이 필요한 모든 필드에 대해서 유효성을 검사한다.
+그래서 데이터를 일부만 수정할 때는 코드 수정이 필요하다.
+PUT: serializer 값에 저장할 것에서 partial=True 를 추가해주면 일부 데이터만 넣어도 일부만 수정하게끔 인식해준다.
+views.py
+```python
+@api_view(['GET', 'DELETE', 'PUT'])
+def article_detail(request, article_pk):
+    article = Article.objects.get(pk=article_pk)
+
+    if request.method == 'GET':
+        serializer = ArticleSerializer(article)
+        return Response(serializer.data)
+
+    elif request.method == 'DELETE':
+        article.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    elif request.method == 'PUT':
+        serializer = ArticleSerializer(article, data=request.data, partial=True)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+```
