@@ -61,8 +61,8 @@
   출력: hello
   * 개발자도구 브라우저 콘솔에 직접 입력하는 경우도 있다.
 
-### [DOM(The Document Object Model)] :star:
-  * <span style='color:red'>중요</span> :star: :star: :star:
+### [DOM(The Document Object Model)] ⭐
+  * <span style='color:red'>중요</span> ⭐⭐⭐
   * 웹페이지(Document)를 구조화된 객체로 제공하여 프로그래밍 언어가 페이지 구조에 접근할 수 있는 방법을 제공
   * 문서, 구조, 스타일, 내용 등을 변경할 수 있도록 함
 
