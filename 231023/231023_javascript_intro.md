@@ -152,7 +152,7 @@
 
 ### [클래스 속성 조작]
   * 'classList' property
-  * 요소의 클래스 목록을 DOMTTokenList(유사 배열) 형태로 반환
+  * 요소의 클래스 목록을 DOMTokenList(유사 배열) 형태로 반환
 
 ### [classList 메서드]
   ```element.classList.add()```
@@ -357,3 +357,6 @@
     * Your snippet: consolelog()
     copy snippet 클릭해서 json 파일에 옮겨주기
   4. 처음 마우스 입력 장소를 찍어주기 위해서 ```console.log($0)``` $0 표시
+
+### 과제 1-2 막힌 부분
+  1. b 태그 안에 id="name", id="job" 이런 식으로 나뉘는데 어떻게 해서 설정해줄까?
