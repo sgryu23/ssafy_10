@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="btn">버튼</button>
+
+  <script>
+    // 1. 버튼 선택
+    const btn = document.querySelector('#btn')
+    // 버튼이라고 적힌 id를 선택하기 위해 #btn
+    // querySelector는 변수를 반환하기 때문에 btn으로 받아줌
+    // class 인 경우 '.btn'
+    // tag 자체를 선택하는 경우 'div' 이런 식으로 해준다.
+    // querySelector()는 변수를 반환하기 때문에 변수를 받아줄 것을 const로 정의해주자.
+    
+    // 두 번째로 해야 하는 일은 addEventListener 하는 것(근데 함수를 위에 작성해줘야 불러오니까 코드 작성 결과 콜백 함수가 위에 와버림) -> 밑에 2. 로 가서 보기
+    // 3. 콜백함수 작성: 함수가 길어지면 표현식으로 여기서 써주자. (유지보수의 측면에서)
+    const clickCallbackFunc = function(event) {
+      console.log(event)   // PointerEvent가 나온다. 콘솔 창에서 보면 버튼을 누르면 어떤 변화가 생기는지 결과가 나온다. (이 코드에서는 특정한 변화를 안 넣었으니까 콘솔 창에서의 변화만 보인다.)
+      console.log(event.target)  // 이건 event가 발생하면 어느 코드로 가는지 보여준다. (선택한 위치로 반환해줌)
+      console.log(event.currentTarget)  // EventListener가 부착되어 있는 곳을 반환해줌
+      console.log(this)
+    }
+    // 콜백 함수는 return이 없고 어떤 행동을 할지 넣어준다.
+    // event를 받으면 어떤 행동을 할지 넣어줌
+
+    // 2. 버튼에 이벤트 핸들러를 부착
+    btn.addEventListener('click',  clickCallbackFunc)
+    // function (event) {
+    //   console.log(event)
+    //   console.log(event.target)
+    //   console.log(event.currentTarget)
+    //   console.log(this)
+    // }
+    // 웹 페이지에서 열어서 버튼을 눌러서 발생하는 이벤트 확인
+    // console.log(event.target) 만들고 다시 확인: 출력에 html 요소가 나옴
+    // console.log(event.currentTarget) 만들고 확인: 외관상으로는 event.target과 같게 나옴
+    // console.log(this) 위 두 개랑 출력 값이 같다는 것까지만 확인
+    // 이 지점에서 function이 들어가는 위치에 화살표 함수랑 this를 함께 쓰면 안 된다. -> 화살표 함수를 쓰면 btn에 정해지는 게 아니라 최상단의 this(window)를 출력한다.
+    // 여기까지 했으면 함수를 만들어주기 위해서 위에 clickCallbackFunc를 만들러 간다.
+  </script>
+</body>
+
+</html>

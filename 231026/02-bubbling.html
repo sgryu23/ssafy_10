@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body * {
+      margin: 10px;
+      border: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <form id="form">
+    form
+    <div id="div">
+      div
+      <p id="p">p</p>
+    </div>
+  </form>
+
+  <script>
+    const formElement = document.querySelector('#form')
+    const divElement = document.querySelector('#div')
+    const pElement = document.querySelector('#p')
+
+    const clickHandler1 = function (event) {
+      console.log('form이 클릭되었습니다.')
+    }
+    const clickHandler2 = function (event) {
+      console.log('div가 클릭되었습니다.')
+    }
+    const clickHandler3 = function (event) {
+      console.log('p가 클릭되었습니다.')
+    }
+
+    formElement.addEventListener('click', clickHandler1)
+    divElement.addEventListener('click', clickHandler2)
+    pElement.addEventListener('click', clickHandler3)
+
+    // p를 누르면 p, div, form을 눌렀습니다 세 개 다 출력
+    // div를 누르면 div, form을 눌렀습니다. 두 개 출력
+    // form을 누르면 한 개 출력
+    // 한 요소에서 이벤트 발생 -> 이벤트 핸들러 동작 -> 부모 핸들러로 가서 동작해준다. -> 최상단의 조상 핸들러를 만날 때까지 반복
+  </script>
+</body>
+
+</html>

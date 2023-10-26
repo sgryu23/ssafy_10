@@ -34,22 +34,24 @@
     * 문자열(str)로 작성한다.
     * 'click'이 많이 들어감
     * 궁금했던 것: 여기에 임의로 문자열을 집어넣어도 되려나? 안 될 것 같지만 궁금해서 문서 찾아봄
-      * 
+      * 예상했던 대로 안 됨. Event Reference: https://developer.mozilla.org/en-US/docs/Web/Events
 
   * handler: 콜백함수
     * 발생한 이벤트 객체를 수신하는 콜백 함수
     * 콜백 함수는 발생한 Event object를 유일한 매개변수로 받음
+
   * 어떤 대상에 특정 Event가 발생하면 지정한 이벤트를 받아 할 일을 등록한다.
 
 ### [addEventListener 활용]
   * 버튼을 클릭하면 버튼 요소 출력하기
-  * 버튼에 이벤트 처리기를 부착하여 클릭 이벤트가 발생하면 이벤트가 발생한 버튼 정보를 출력
-  * 1번 파일에서 실습
+  * 버튼에 addEventListener(이벤트 처리기를 부착하여) 클릭 이벤트가 발생하면 이벤트가 발생한 버튼 정보를 출력
+  * <span style='color:orange'>1번 파일에서 실습</span>
+  * **tips_for_event_javascript.md에 작성**
 
 ### [addEventListener 콜백 함수 특징]
   * 발생한 이벤트를 나타내는 Event 객체를 유일한 매개변수로 받음
   * 아무것도 반환하지 않음
-  * 재사용성 유무를 판단해서 다른 곳에 미리 함수를 만들어놓거나 만들지 안히
+  * <span style='color:orange'>재사용성 유무를 판단</span>해서 addEventListener 위에 콜백 함수를 만들거나 해당 변수 안에 실행할 것을 그대로 넣어줌
 
 ## 버블링
   ### [버블링(Bubbling)]
@@ -60,23 +62,33 @@
   * 버블링은 자식 -> 부모 요소로 전파됨
   
 ### [버블링 예시]
+  * tips_for_event_javascript.md에 상세히 작성함
   * 가장 안쪽의 p 태그 요소를 클릭하면 p -> div -> form 순서로 3개의 이벤트 핸들러가 동작
 
-### [event.target, event.currentTarget 속성]
-  * 'target' 속성: target 요소를 더 많이 사용한다.
+### [event.<span style='color:red'>target</span>, event.<span style='color:red'>currentTarget</span> 속성]
+  event.target, event.currentTarget -> 이벤트가 정확히 어디서 발생했는지 접근할 수 있는 방법
+  * 'target' 속성
+    * 참고: target 요소를 currentTarget보다 더 많이 사용한다.
     * 이벤트가 발생한 가장 안쪽의 요소(target)를 참조하는 속성
     * 실제 이벤트가 시작된 target 요소
     * 버블링이 진행 되어도 변하지 않음
   * 'currentTarget' 속성
     * '현재' 요소
-    * 항상 이벤트 핸들러가 연결된 요소만을 참조하는 속성
+    * 항상 <span style='color:orange'>이벤트 핸들러가 연결</span>된 요소만을 참조하는 속성
     * 'this'와 같음
+  * 이 부분만 읽으면 뭔 말인지 이해가 안 되니까 tips_for_event_javascript.md 참고
+    * 핵심: currentTarget은 addEventListener가 부착된 곳이 출력된다.
+    * target은 현재 내가 선택(클릭) 한 위치를 반환한다. (console.log()로 확인함)
 
 ### ['target' & 'currentTarget' 예시]
   * 세 요소 중 가장 최상위 요소인 outerouter 요소에만 이벤트 핸들러가 부착
+  ```html
+  <script>
+    outerOuterElement.addEventListener('click', clickHandler)
+  ```
   * 각 요소를 클릭했을 때 event의 target과 currentTarget의 차이 비교
   * 'target'
-    * 실제 이벤트가 발생하는 요소를 가리킴
+    * 실제 이벤트가 발생하는 요소를 가리킴(=내가 클릭한 부분을 반환한다)
   * 'currentTarget'
     * 핸들러가 연결된 outerouter 요소만을 가리킴
   * 핸들러는 outerouter에 하나밖에 없지만 이 핸들러에서 outerouter의 내부 모든 하위 요소에서 발생하는 클릭 이벤트를 잡아내고 있음
@@ -89,13 +101,15 @@
   * 1번이 가장 심플한 예제! (이 예제부터 코드를 안 보고 주석으로 순서를 달아놓고 하나씩 작성을 해보는 연습해보기)
   * 이 부분은 html 작성된 파일 참고하기
 
-  * 입력할 때 -> 입력하는 이벤트 리스너를 알아야 한다. 모르니까 mdn (z lzdjnn)
+  * 입력할 때 -> 입력하는 이벤트 리스너를 알아야 한다. 모르니까 MDN 문서를 참고하는 게 좋다.
 
 ## <b style='color:red'>이벤트 기본 동작 취소</b> :star::star::star::star:
+  * 갱장히 중요함~~
 ### [.preventDefault()]
   * 해당 이벤트에 대한 기본 동작을 실행하지 않도록 지정
   * submit 때문에 막히는 경우가 있는데 그걸 방지해주는 게 prevent default다!
+  * 크롬에서 F12(개발자도구) > F1(환경설정): (아래로 내려서) 자바스크립트 사용 중지 체크하면 복사할 수 있다.
 
 ### [이벤트 동작 취소 실습]
-  * copy 이벤트 동작 취소
+  * 09-prevent-event.html 참고
 

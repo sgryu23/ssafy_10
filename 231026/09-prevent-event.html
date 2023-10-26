@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>중요한 내용</h1>
+
+  <form id="my-form">
+    <input type="text" name="username">
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    // 1
+    const h1Tag = document.querySelector('h1')  // h1 인자를 선택하고 h1Tag에 저장
+
+    h1Tag.addEventListener('copy', function (event) {
+      console.log(event)              // 이건 콘솔 창에 띄워주기 위해 찍어주는 것
+      event.preventDefault()          // copy가 들어간 걸 실행하지 못하도록 하는 EventListener
+      alert('복사 할 수 없습니다.')
+    })
+
+    // 2 submit을 누르면 반응하지 않게 만드는 것
+    const formTag = document.querySelector('#my-form')
+
+    const handleSubmit = function (event) {
+      console.log(event)
+      event.preventDefault()
+    }
+
+    formTag.addEventListener('submit', handleSubmit)
+
+  </script>
+</body>
+
+</html>

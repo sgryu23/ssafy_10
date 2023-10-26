@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .blue {
+      color: skyblue;
+    }
+  </style>
+</head>
+
+<body>
+  <h1></h1>
+  <button id="btn">클릭</button>
+  <input type="text" id="text-input">
+
+  <script>
+    // input 구현
+    const inputTag = document.querySelector('#text-input')
+    const h1Tag = document.querySelector('h1')
+    
+    const inputHandler = function (event) {
+      h1Tag.textContent = event.currentTarget.value
+    }
+
+    inputTag.addEventListener('input', inputHandler)
+
+    // click 구현
+    const btn = document.querySelector('#btn')
+
+    const clickHandler = function (event) {
+      // console.log(event) 동작 확인용 출력
+      // h1Tag.classList.add('blue')
+
+      // togle 쓰면 if를 귀찮게 안 써도 된다.(있으면 제거하고, 없으면 해당 속성에 추가)
+      h1Tag.classList.toggle('blue')
+    }
+
+    btn.addEventListener('click', clickHandler)
+  </script>
+</body>
+
+</html>
