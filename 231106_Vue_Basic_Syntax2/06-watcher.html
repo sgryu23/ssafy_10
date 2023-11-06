@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 1 watch 붙여보기 -->
+    <button @click="count++">Add 1</button>
+    <p>Count: {{ count }}</p>
+
+    <!-- 2 -->
+    <input v-model="message">
+    <p>Message length: {{ messageLength }}</p>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp, ref, watch } = Vue   // watch는 가져와야 함
+
+    const app = createApp({
+      setup() {
+        const count = ref(0)
+        const message = ref('')
+        const messageLength = ref(0)
+
+        const countWatch = watch(count, (newValue, oldValue) => {
+          console.log(`newValue: ${newValue}, old Value: ${oldValue}`)
+        })
+        // watch는 return에 담지도 않았는데 값을 콘솔에 반환해준다.
+        // watch는 tmplate에서 쓰이지 않으므로 반환해주지 않는다.
+
+        const messageWatch = watch(message, (newValue, oldValue) => {
+          messageLength.value = newValue.length
+        })
+
+        return {
+          count,
+          message,
+          messageLength
+        }
+      }
+    })
+
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <button @click="count++">Add 1</button>
+    <p>Count: {{ count }}</p>
+    <p>{{ message }}</p>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp, ref, onMounted, onUpdated } = Vue
+
+    const app = createApp({
+      setup() {
+        const count = ref(0)
+        const message = ref(null)  // 처음 값은 null이라서 Web에서는 안 보임 -> updated 되는 순간 onUpdated 가 실행되며 message에 값이 담긴다.
+
+        onMounted(() => {
+          console.log('mounted')  // 이 친구는 안 불러도 mounted 되면 console에 불러와진다!
+        })
+
+        onUpdated(() => {
+          message.value = 'updated~!'  // 원래 있던 DOM에 이벤트가 발생해서 값이 변경할 때 출력됨
+        })
+
+        return {
+          count,
+          message
+        }
+      },
+    })
+
+    app.mount('#app')
+
+  </script>
+</body>
+
+</html>
